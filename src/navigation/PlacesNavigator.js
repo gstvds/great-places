@@ -13,7 +13,7 @@ import Colors from "../constants/Colors";
 const PlacesNavigator = createStackNavigator(
   {
     Places: PlacesListScreen,
-    PlacesDetail: PlaceDetailScreen,
+    PlaceDetail: PlaceDetailScreen,
     NewPlace: NewPlaceScreen,
     Map: MapScreen
   },
@@ -22,7 +22,8 @@ const PlacesNavigator = createStackNavigator(
       headerStyle: {
         backgroundColor: Platform.OS === "android" ? Colors.primary : ""
       },
-      headerTintColor: Platform.OS === "android" ? "white" : Colors.primary
+      headerTintColor: Platform.OS === "android" ? "white" : Colors.primary,
+      headerBackTitle: "Back"
     }
   }
 );

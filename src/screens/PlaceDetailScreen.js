@@ -17,4 +17,8 @@ const styles = StyleSheet.create({
   }
 });
 
+PlaceDetailScreen.navigationOptions = {
+  headerTitle: "Details"
+};
+
 export default PlaceDetailScreen;
