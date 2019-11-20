@@ -7,23 +7,24 @@ import {
   Button,
   StyleSheet
 } from "react-native";
-import {useDispatch} from 'react-redux'
+import { useDispatch } from "react-redux";
 
 import Colors from "../constants/Colors";
-import * as placesActions from '../store/places-actions'
+import * as placesActions from "../store/places-actions";
+import ImagePicker from "../components/ImagePicker";
 
 const NewPlaceScreen = props => {
   const [titleValue, setTitleValue] = useState("");
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const titleChangeHandler = text => {
     setTitleValue(text);
   };
 
   const savePlaceHandler = () => {
-    dispatch(placesActions.addPlace(titleValue))
-    props.navigation.goBack()
+    dispatch(placesActions.addPlace(titleValue));
+    props.navigation.goBack();
   };
 
   return (
@@ -35,6 +36,7 @@ const NewPlaceScreen = props => {
           onChangeText={titleChangeHandler}
           value={titleValue}
         />
+        <ImagePicker />
         <Button
           title="Save"
           color={Colors.primary}
