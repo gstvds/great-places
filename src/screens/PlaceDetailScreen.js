@@ -17,8 +17,10 @@ const styles = StyleSheet.create({
   }
 });
 
-PlaceDetailScreen.navigationOptions = {
-  headerTitle: "Details"
+PlaceDetailScreen.navigationOptions = navData => {
+  return {
+    headerTitle: navData.navigation.getParam("placeTitle")
+  };
 };
 
 export default PlaceDetailScreen;
