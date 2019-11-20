@@ -16,7 +16,7 @@ const PlacesListScreen = props => {
       keyExtractor={item => item.id}
       renderItem={itemData => (
         <PlaceItem
-          image={null}
+          image={itemData.item.imageUri}
           title={itemData.item.title}
           address={null}
           onSelect={() => {
@@ -31,13 +31,7 @@ const PlacesListScreen = props => {
   );
 };
 
-const styles = StyleSheet.create({
-  screen: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center"
-  }
-});
+const styles = StyleSheet.create({});
 
 PlacesListScreen.navigationOptions = navData => {
   return {

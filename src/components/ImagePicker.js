@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, Button, Image, Text, StyleSheet, Alert } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import * as Permissions from "expo-permissions";
@@ -6,6 +6,8 @@ import * as Permissions from "expo-permissions";
 import Colors from "../constants/Colors";
 
 const ImgPicker = props => {
+  const [pickedImage, setPickedImage] = useState();
+
   const verifyPermissions = async () => {
     // Used to check if users allows access to the camera
     const result = await Permissions.askAsync(
@@ -29,14 +31,27 @@ const ImgPicker = props => {
     if (!hasPermission) {
       return;
     }
-    ImagePicker.launchCameraAsync();
+    // image gets: cancelled, height, type, uri and width
+    // uri refers to a temporary directory which is cleaned up automatically periodically
+    // later we will store it permanently with the filesystem API
+    const image = await ImagePicker.launchCameraAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: true,
+      aspect: [16, 9],
+      quality: 0.5
+    });
+    setPickedImage(image.uri);
+    props.onImageTaken(image.uri);
   };
 
   return (
     <View style={styles.imagePicker}>
       <View style={styles.imagePreview}>
-        <Text>No image picked yet.</Text>
-        <Image style={styles.image} />
+        {!pickedImage ? (
+          <Text>No image picked yet.</Text>
+        ) : (
+          <Image style={styles.image} source={{ uri: pickedImage }} />
+        )}
       </View>
       <Button
         title="Take Image"
@@ -49,7 +64,8 @@ const ImgPicker = props => {
 
 const styles = StyleSheet.create({
   imagePicker: {
-    alignItems: "center"
+    alignItems: "center",
+    marginBottom: 15
   },
   imagePreview: {
     width: "100%",
