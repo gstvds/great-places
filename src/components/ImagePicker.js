@@ -12,7 +12,7 @@ const ImgPicker = props => {
       Permissions.CAMERA,
       Permissions.CAMERA_ROLL
     );
-    if (result.stats !== "granted") {
+    if (result.status !== "granted") {
       Alert.alert(
         "Insufficient permissions!",
         "You need to grant camera permissions to add image",
